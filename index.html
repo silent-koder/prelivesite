@@ -1,0 +1,422 @@
+<?php
+
+@include 'config.php';
+
+session_start();
+
+if(isset($_POST['submit'])){
+    
+	$people = ($_POST['people']);
+	$eventdt = ($_POST['eventdt']);
+	$phone = ($_POST['phone']);
+	$name = ($_POST['name']);
+	$email = mysqli_real_escape_string($conn, $_POST['email']);
+
+	$select = " SELECT * FROM user_form WHERE people = '$people' && eventdt = '$eventdt' && phone = '$phone' && name = '$name' && email = '$email'  ";
+
+	$result = mysqli_query($conn, $select);
+
+	if(mysqli_num_rows($result) > 0){
+		$error[] = 'user already exist';
+	}else{
+		$insert = "INSERT INTO user_form(people,eventdt,phone,name,email) VALUES('$people','$eventdt','$phone','$name','$email')";
+		mysqli_query($conn, $insert);
+		header('location:index.php');
+	}
+}
+if(isset($_POST['submit_nl'])){
+    
+
+	$email = mysqli_real_escape_string($conn, $_POST['email']);
+
+	$select = " SELECT * FROM newsletter WHERE  email = '$email'  ";
+
+	$result = mysqli_query($conn, $select);
+
+	if(mysqli_num_rows($result) > 0){
+		$error[] = 'user already exist';
+	}else{
+		$insert = "INSERT INTO newsletter(email) VALUES('$email')";
+		mysqli_query($conn, $insert);
+		header('location:index.php');
+	}
+	
+
+
+
+}
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ravid</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+	<!-- custom css file link -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	
+
+</head>
+<body>
+	<!-- header section start -->
+	<header>
+		<a href="#" class="logo"><img src="logoo.png"></a>
+
+		<nav class="navbar">
+			<a href="#home" class="active">home</a>
+			<a href="#about">about</a>
+			<a href="#menu">menu</a>
+			<a href="#team">team</a>
+			<a href="#reservation">reservation</a>
+		</nav>
+
+	</header>
+	<!-- header section end -->
+
+	<!-- slider section start -->
+	<div class="home" id="home">
+		<div class="swiper home-slider">
+				
+			<div class="swiper-slide slide slide2">
+				<div class="content">
+					<img src="crown-symbol.png">
+					<h1>the fresh</h1>
+					<p>
+						food restaurant
+					</p>
+					<a href="#reservation" class="btn">order now</a>
+				</div>
+			</div>
+
+			<div class="swiper-pagination"></div>
+		</div>
+	</div>
+	<!-- slider section ends -->
+
+	<!-- welcome section start -->
+	<section class="welcome" id="about">
+		<h1 class="heading">WELCOME TO ROYATE</h1>
+		<center><h3 class="sub-heading"> ~ Luxury & Quality ~ </h3></center>
+
+		<div class="box-container">
+			<div class="box">
+				<div class="image">
+					<img src="post-thumb-1.jpg">
+				</div>
+
+				<div class="content">
+					<h3>PROFESSIONAL LEVEL</h3>
+					<p>nor again is there anyone who loves or pursues or desires to obtain pain of itself, becuase it is pain, but because occasionally circumstances occur.</p>
+
+					<a href="#" class="btn">Read More</a>
+				</div>
+			</div>
+
+			<div class="box">
+				<div class="image">
+					<img src="post-thumb-2.jpg">
+				</div>
+
+				<div class="content">
+					<h3>FRESH FOOD GUARANTEED</h3>
+					<p>nor again is there anyone who loves or pursues or desires to obtain pain of itself, becuase it is pain, but because occasionally circumstances occur.</p>
+
+					<a href="#" class="btn">Read More</a>
+				</div>
+			</div>
+
+			<div class="box">
+				<div class="image">
+					<img src="post-thumb-3.jpg">
+				</div>
+
+				<div class="content">
+					<h3>THE MENU IS PLENTIFUL</h3>
+					<p>nor again is there anyone who loves or pursues or desires to obtain pain of itself, becuase it is pain, but because occasionally circumstances occur.</p>
+
+					<a href="#" class="btn">Read More</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- welcome section start -->
+
+	<!-- our menu section start -->
+	<section class="our-menu" id="menu">
+		<h1 class="heading">our food menu</h1>
+		<center><h3 class="sub-heading"> ~ see what we offer ~ </h3></center>
+
+		<div class="menu-container">
+
+			<div class="item">
+				<div class="item-name">
+					<h2>Main Course</h2>
+					<img src="main.png">
+				</div>
+
+				<div class="item-body">
+					<div class="item-menu">
+						<h3>Fried rice </h3>
+						<span class="dots"></span>
+						<h3>&#8358; 4,000</h3>
+
+						<ul>
+							<li><a href="#">Chicken</a></li>
+							<li><a href="#">Italian</a></li>
+							<li><a href="#">Sausage</a></li>
+							<li><a href="#">Spinach</a></li>
+						</ul>
+					</div>
+
+					<div class="item-menu">
+						<h3>Pounded yam</h3>
+						<span class="dots"></span>
+						<h3>2,600</h3>
+
+						<ul>
+							<li><a href="#">White Soup</a></li>
+							<li><a href="#">Vegetable Soup</a></li>
+							<li><a href="#">Egusi Soup</a></li>
+							<li><a href="#">Spinach</a></li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="item-name">
+					<h2>Soups & salads</h2>
+					<img src="soup.png">
+				</div>
+
+				<div class="item-body">
+					<div class="item-menu">
+						<h3>Pepper Soup</h3>
+						<span class="dots"></span>
+						<h3>&#8358; 2,500</h3>
+
+						<ul>
+							<li><a href="#">Chicken</a></li>
+							<li><a href="#">Catfish</a></li>
+							<li><a href="#">Goat Head</a></li>
+							<li><a href="#">Assorted</a></li>
+						</ul>
+					</div>
+
+					<div class="item-menu">
+						<h3>Salad</h3>
+						<span class="dots"></span>
+						<h3>&#8358; 1,600</h3>
+
+						<ul>
+							<li><a href="#">Mushrooms</a></li>
+							<li><a href="#">Corn</a></li>
+							<li><a href="#">Cream</a></li>
+							<li><a href="#">Bitter Leaf</a></li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="item">
+				<div class="item-name">
+					<h2>Drinks</h2>
+					<img src="wine.png">
+				</div>
+
+				<div class="item-body">
+					<div class="item-menu">
+						<h3>Cocktail</h3>
+						<span class="dots"></span>
+						<h3>&#8358; 1,000</h3>
+
+						<ul>
+							<li><a href="#">Chicken</a></li>
+							<li><a href="#">Italian</a></li>
+							<li><a href="#">Sausage</a></li>
+							<li><a href="#">Spinach</a></li>
+						</ul>
+					</div>
+
+					<div class="item-menu">
+						<h3>Soft Drinks</h3>
+						<span class="dots"></span>
+						<h3>&#8358; 200</h3>
+
+						<ul>
+							<li><a href="#">Fanta</a></li>
+							<li><a href="#">Coca-Cola</a></li>
+							<li><a href="#">Pepsi</a></li>
+							<li><a href="#">Malt</a></li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="item">
+				<div class="item-name">
+					<h2>Desserts</h2>
+					<img src="dessert.png">
+				</div>
+
+				<div class="item-body">
+					<div class="item-menu">
+						<h3>Ice Cream</h3>
+						<span class="dots"></span>
+						<h3>&#8358; 1,900</h3>
+
+						<ul>
+							<li><a href="#">Chocolate</a></li>
+							<li><a href="#">Vanilla</a></li>
+							<li><a href="#">Strawberry</a></li>
+							<li><a href="#">sprinkles</a></li>
+						</ul>
+					</div>
+
+					
+
+				</div>
+			</div>
+
+		</div>
+	</section>
+	<!-- our menu section ends -->
+
+	<!-- our team section start -->
+	<section class="our-team" id="team">
+		<h1 class="heading">our talented chef</h1>
+		<center>
+			<h3 class="sub-heading"> ~ Experience $ Enthusiasm ~ </h3>
+		</center>
+
+		<div class="our-chef">
+			<div class="item">
+				<div class="image">
+					<img src="chef 1.jpg">
+				</div>
+
+				<div class="chef-info">
+					<div>
+						<h3>Robbinson Joseph</h3>
+						<span>Master chef</span>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="image">
+					<img src="chef 2.jpg">
+				</div>
+
+				<div class="chef-info">
+					<div>
+						<h3>Joy Effor</h3>
+						<span>Master chef</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="image">
+					<img src="chef 3.jpg">
+				</div>
+
+				<div class="chef-info">
+					<div>
+						<h3>Martin Osi</h3>
+						<span>Master chef</span>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</section>
+	<!-- our team section ends -->
+
+
+	<!-- reservation section start -->
+		<div class="reservation" id="reservation">
+			<div class="image">
+				
+			</div>
+
+			<div class="form">
+
+				<h1 class="heading">book a table</h1>
+				<center><h3 class="sub-heading">~ check out our place ~ </h3></center>
+
+				<form action="index.php" method="post" >
+					<div class="form-holder">
+						<div>
+							<input type="number" name="people" placeholder="People">
+							<input type="datetime-local" name="eventdt" placeholder="Date">
+							<input type="text" name="phone" placeholder="Phone">
+						</div>
+
+						<div>
+							<input type="text" name="name" placeholder="Name">
+							<input type="email" name="email" placeholder="email">
+						</div>
+					</div>
+					<center><input type="submit" name="submit" class="btn" value="Book now"></center>
+				</form>
+			</div>
+		</div>
+	<!-- reservation section ends -->
+
+	
+
+	<!-- footer section start -->
+	<section class="footer">
+		<img src="logoo.png" class="logo">
+
+		<div class="container">
+			<div>
+				<h3>ABOUT US</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+			</div>
+
+			<div>
+				<h3>GET NEWS & OFFERS</h3>
+				<p>Subscribe to our newsletter to get our latest news and quisines.</p>
+				<form action="index.php" method="post">
+
+					<input type="email" name="email" placeholder="enter your email">
+					<center><input type="submit" name="submit_nl" class="btn" value="Subscribe"></center>
+				</form>
+			</div>
+
+			<div>
+				<h3>CONTACT US</h3>
+				<span>Precious Onokamu</span>
+				<span>+ (234)7018428353</span>
+				<span>onokamu.up@gmail.com</span>
+			</div>
+		</div>
+		<br>
+
+		<p>&copy;2023 Reserved by Precious Onokamus</p>
+	</section>
+	<!-- footer section end -->
+
+	<!-- jump to top -->
+
+	<a href="#"><button class="topbtn"><img src="arrow.png" alt=""></button></a>
+
+
+
+</body>
+</html>
